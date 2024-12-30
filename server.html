@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Management</title>
+    <link href="css/main2.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+     <!-- Navigation Bar -->
+     <div class="navbar w-nav" data-animation="default" data-collapse="medium" data-duration="400">
+        <div class="nav-shadow"></div>
+        <div class="container navbar-container z-index-2">
+            <a href="/" class="brand w-nav-brand">
+                <img src="path/to/your/logo.svg" loading="eager" alt="Logo" class="logo-image">
+            </a>
+            </nav>
+            <div class="menu-button w-nav-button">
+                <div class="burger-lines-wrapper">
+                    <div class="burger-menu-line"></div>
+                    <div class="burger-menu-line"></div>
+                    <div class="burger-menu-line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <aside class="device-list">
+            <h3>Devices</h3>
+            <ul>
+                <li>Server 1</li>
+                <li>Server 2</li>
+                <li>Server 3</li>
+            </ul>
+        </aside>
+        <section class="server-details">
+            <div class="server-statistics">
+                <h4>CPU Details</h4>
+                <p>CPU Type: <span id="cpuType"></span></p>
+                <p>RAM: <span id="ramAmount"></span> GB</p>
+                <p>Storage: <span id="storageAmount"></span> TB</p>
+            </div>
+            <div class="server-statistics">
+                <h4>Performance</h4>
+                <p>CPU Usage: <span id="cpuUsage"></span>%</p>
+                <p>RAM Usage: <span id="ramUsage"></span>%</p>
+                <p>Storage Usage: <span id="storageUsage"></span>%</p>
+            </div>
+            <div class="server-statistics">
+                <h4>Network & Temperature</h4>
+                <p>CPU Temperature: <span id="cpuTemp"></span>°C</p>
+                <p>Network Speed: <span id="networkSpeed"></span> Mbps</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
