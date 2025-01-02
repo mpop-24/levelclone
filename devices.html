@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl"> <!-- Right-to-left orientation -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Device Purchase Form</title>
+    <link rel="stylesheet" href="css/main2.css"> <!-- Ensure this path is correct -->
+</head>
+<body>
+    <div class="navbar"> <!-- Navigation bar -->
+        <!-- Same navbar code as in your index.html or server.html -->
+    </div>
+
+    <div class="form-container">
+        <h1 class="form-title">Purchase Devices</h1>
+        <form action="/submit-your-form-handler" method="post" class="device-form">
+            <!-- Region Selection -->
+            <div class="form-section">
+                <h2>Select Region</h2>
+                <div class="grid-container">
+                    <button type="button" class="region-select">🇺🇸 USA</button>
+                    <button type="button" class="region-select">🇬🇧 UK</button>
+                    <button type="button" class="region-select">🇦🇺 Australia</button>
+                </div>
+            </div>
+
+            <!-- OS Selection -->
+            <div class="form-section">
+                <h2>Operating System</h2>
+                <div class="grid-container">
+                    <button type="button" class="os-select">Linux</button>
+                    <button type="button" class="os-select">MacOS</button>
+                </div>
+            </div>
+
+            <!-- Additional Storage -->
+            <div class="form-section">
+                <label><input type="checkbox" id="storage-checkbox" onclick="toggleStorageOptions()"> Add additional storage</label>
+                <div class="grid-container hidden" id="additional-storage">
+                    <button type="button" class="storage-option">256GB</button>
+                    <button type="button" class="storage-option">512GB</button>
+                </div>
+            </div>
+
+            <!-- Authentication -->
+            <div class="form-section">
+                <h2>Authentication</h2>
+                <div class="grid-container">
+                    <button type="button" class="auth-option">SSH</button>
+                    <button type="button" class="auth-option">Blank</button>
+                </div>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-section">
+                <h2>Quantity</h2>
+                <div class="quantity-selector">
+                    <button type="button" onclick="changeQuantity(-1)">-</button>
+                    <input type="number" id="quantity" value="1" min="1" max="5">
+                    <button type="button" onclick="changeQuantity(1)">+</button>
+                </div>
+            </div>
+
+            <!-- Host Name -->
+            <div class="form-section">
+                <h2>Host Name</h2>
+                <input type="text" id="hostname" name="hostname" placeholder="Enter host name">
+            </div>
+
+            <!-- Pricing Display -->
+            <div class="form-section">
+                <h2>Pricing</h2>
+                <p id="price-display">$0.00</p>
+            </div>
+
+            <button type="submit" class="submit-button">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleStorageOptions() {
+    var storageSection = document.getElementById('additional-storage');
+    var checkbox = document.getElementById('storage-checkbox');
+    storageSection.style.display = checkbox.checked ? 'block' : 'none';
+}
+
+function changeQuantity(change) {
+    var quantityInput = document.getElementById('quantity');
+    var currentQuantity = parseInt(quantityInput.value);
+    currentQuantity += change;
+    if (currentQuantity < 1) currentQuantity = 1;
+    if (currentQuantity > 5) currentQuantity = 5;
+    quantityInput.value = currentQuantity;
+    updatePricing();
+}
+
+function updatePricing() {
+    // Update pricing logic here based on selections
+    var priceDisplay = document.getElementById('price-display');
+    // Example price calculation
+    priceDisplay.innerText = '$' + (100 * parseInt(document.getElementById('quantity').value)).toFixed(2);
+}
+    </script> <!-- Ensure this path is correct -->
+</body>
+</html>
