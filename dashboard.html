@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/main2.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> 
+</head>
+<body>
+    <div class="navbar w-nav" data-animation="default" data-collapse="medium" data-duration="400">
+        <div class="nav-shadow"></div>
+        <div class="container navbar-container z-index-2">
+            <a href="/" class="brand w-nav-brand">
+                <img src="https://cdn.prod.website-files.com/65707faecd4cd453c0bb80ad/657087ef22ae05f257ad0b7b_Logo%20(1).svg" loading="eager" alt="Logo" class="logo-image">
+            </a>
+        </div>
+    </div>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h1 class="dashboard-title">Dashboard</h1>
+            <div class="button-container">
+                <button class="tab-button server active" onclick="openTab('server')">
+                    <i class="fas fa-server"></i> Server
+                </button>
+                <button class="tab-button devices" onclick="openTab('devices')">
+                    <i class="fas fa-desktop"></i> Devices
+                </button>
+            </div>
+            <button class="logout-button">
+                <i class="fas fa-sign-out-alt"></i> Log out
+            </button>
+        </aside>
+        <main class="main-content">
+            <div id="server-content">
+                <div class="server-container">
+                    <aside class="device-list">
+                        <h3>Devices</h3>
+                        <ul>
+                            <li>Server 1</li>
+                            <li>Server 2</li>
+                            <li>Server 3</li>
+                        </ul>
+                    </aside>
+                    <section class="server-details">
+                        <div class="server-statistics">
+                            <h4>CPU Details</h4>
+                            <p>CPU Type: <span id="cpuType"></span></p>
+                            <p>CPU Usage: <span id="cpuUsage"></span>%</p>
+                            <p>CPU Temperature: <span id="cpuTemp"></span>°C</p>
+                            
+                        </div>
+                        <div class="server-statistics">
+                            <h4>Ram & Storage</h4>
+                            <p>RAM: <span id="ramAmount"></span> GB</p>
+                            <p>Storage: <span id="storageAmount"></span> TB</p> 
+                            <p>RAM Usage: <span id="ramUsage"></span>%</p>
+                            <p>Storage Usage: <span id="storageUsage"></span>%</p>
+                        </div>
+                        <div class="server-statistics">
+                            <h4>Network</h4>
+                            <p>Network Speed: <span id="networkSpeed"></span> Mbps</p>
+                        </div>
+                    </section>
+                </div>
+            </div>
+           
+            <div id="devices-section" class="content-section" style="display: none;">
+                <div class="form-container" id="devices-content">
+                            <h1 class="form-title">Devices</h1>
+                            <h3 class="devices-description">Configure your virtual machines.</h3>
+                            <form action="/submit-your-form-handler" method="post" class="device-form">
+                                <div class="form-section">
+                                    <h2 class="select-region">Select Region</h2>
+                                    <div class="options-container">
+                                        <button type="button" class="region-select"><img src="united-states (1).png" alt="US" class="region-flag"> New York</button>
+                                        <button type="button" class="region-select"><img src="united-states (1).png" alt="US" class="region-flag"> San Francisco</button>
+                                        <button type="button" class="region-select"><img src="united-kingdom (1).png" alt="US" class="region-flag"> London</button>
+                                        <button type="button" class="region-select"><img src="australia.png" alt="US" class="region-flag"> Sydney</button>
+                                        <button type="button" class="region-select"><img src="canada.png" alt="US" class="region-flag"> Toronto</button>
+                                        <button type="button" class="region-select"><img src="singapore.png" alt="US" class="region-flag"> Singapore</button>
+                                        <button type="button" class="region-select"><img src="netherlands.png" alt="US" class="region-flag"> Amsterdam</button>
+                                        <button type="button" class="region-select"><img src="india.png" alt="US" class="region-flag"> Bangalore</button>
+                                    </div>
+                                </div>
+                    
+                                <div class="form-section">
+                                    <h2>Operating System</h2>
+                                    <div class="options-container">
+                                        <button type="button" class="os-select"> <img src="linux_518713.png"> Linux</button>
+                                        <button type="button" class="os-select"> <img src="apple_270781.png"> MacOS</button>
+                                    </div>
+                                </div>
+                    
+                                <div class="form-section">
+                                    <label class="add-storage"><input type="checkbox" id="storage-checkbox" onclick="toggleStorageOptions()"> Add additional storage</label>
+                                    <div class="options-container hidden" id="additional-storage">
+                                        <button type="button" class="storage-option">256GB</button>
+                                        <button type="button" class="storage-option">512GB</button>
+                                    </div>
+                                </div>
+                    
+                                <div class="form-section">
+                                    <h2>Authentication</h2>
+                                    <div class="options-container">
+                                        <button type="button" class="auth-option">SSH</button>
+                                        <button type="button" class="auth-option">Blank</button>
+                                    </div>
+                                </div>
+                    
+                                <div class="form-section">
+                                    <h2>Quantity</h2>
+                                    <div class="quantity-selector">
+                                        <button type="button" onclick="changeQuantity(-1)">-</button>
+                                        <input type="number" id="quantity" value="1" min="1" max="5">
+                                        <button type="button" onclick="changeQuantity(1)">+</button>
+                                    </div>
+                                </div>
+                    
+                                <div class="form-section">
+                                    <h2>Host Name</h2>
+                                    <input type="text" id="hostname" name="hostname" placeholder="Enter host name">
+                                </div>
+                    
+                                <div class="form-section">
+                                    <h2>Pricing</h2>
+                                    <p id="price-display">$0.00</p>
+                                </div>
+                    
+                                <button type="submit" class="submit-button">Checkout <img src="shopping-cart.png"></button>
+                            </form>
+                            
+
+                        </div>
+                    
+                        <script>
+                            document.getElementById('storage-checkbox').addEventListener('change', function() {
+                            var storageSection = document.getElementById('additional-storage');
+                            if (this.checked) {
+                                storageSection.style.display = 'flex'; // Show the additional storage options
+                            } else {
+                                storageSection.style.display = 'none'; // Hide the additional storage options
+                            }
+                        });
+
+                            function toggleStorageOptions() {
+                                var storageSection = document.getElementById('additional-storage');
+                                storageSection.style.display = document.getElementById('storage-checkbox').checked ? 'flex' : 'none';
+                            }
+
+                            function changeQuantity(change) {
+                                var quantityInput = document.getElementById('quantity');
+                                var currentQuantity = parseInt(quantityInput.value) + change;
+                                quantityInput.value = Math.max(1, Math.min(5, currentQuantity));
+                                updatePricing();
+                            }
+
+                            function updatePricing() {
+                                var price = 100 * parseInt(document.getElementById('quantity').value);
+                                document.getElementById('price-display').innerText = '$' + price.toFixed(2);
+                            }
+                        </script>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            document.querySelector(`.tab-button.${tabName}`).classList.add('active');
+            
+            // Hide all content sections
+            document.getElementById('server-content').style.display = 'none';
+            document.getElementById('devices-section').style.display = 'none';
+            
+            // Show the selected content
+            if (tabName === 'server') {
+                document.getElementById('server-content').style.display = 'block';
+            } else if (tabName === 'devices') {
+                document.getElementById('devices-section').style.display = 'block';
+            }
+        }
+
+        // Initialize the page with the server tab open
+        window.onload = function() {
+            openTab('server');
+        };
+    </script>
+</body>
+</html>

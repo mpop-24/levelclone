@@ -1,57 +1,62 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl"> <!-- Right-to-left orientation -->
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Device Purchase Form</title>
-    <link rel="stylesheet" href="css/main2.css"> <!-- Ensure this path is correct -->
+    <link rel="stylesheet" href="css/main2.css"> <!-- Update this path as needed -->
 </head>
 <body>
-    <div class="navbar"> <!-- Navigation bar -->
-        <!-- Same navbar code as in your index.html or server.html -->
+    <div class="navbar w-nav" data-animation="default" data-collapse="medium" data-duration="400">
+        <div class="nav-shadow"></div>
+        <div class="container navbar-container z-index-2">
+            <a href="/" class="brand w-nav-brand">
+                <img src="https://cdn.prod.website-files.com/65707faecd4cd453c0bb80ad/657087ef22ae05f257ad0b7b_Logo%20(1).svg" loading="eager" alt="Logo" class="logo-image">
+            </a>
+        </div>
     </div>
 
     <div class="form-container">
-        <h1 class="form-title">Purchase Devices</h1>
+        <h1 class="form-title">Devices</h1>
+        <h3 class="devices-description">Configure your vitrual machines.</h3>
         <form action="/submit-your-form-handler" method="post" class="device-form">
-            <!-- Region Selection -->
             <div class="form-section">
-                <h2>Select Region</h2>
-                <div class="grid-container">
-                    <button type="button" class="region-select">🇺🇸 USA</button>
-                    <button type="button" class="region-select">🇬🇧 UK</button>
-                    <button type="button" class="region-select">🇦🇺 Australia</button>
+                <h2 class="select-region">Select Region</h2>
+                <div class="options-container">
+                    <button type="button" class="region-select">🇺🇸 New York</button>
+                    <button type="button" class="region-select">🇬🇧 London</button>
+                    <button type="button" class="region-select">🇦🇺 Sydney</button>
+                    <button type="button" class="region-select">🇨🇦 Toronto</button>
+                    <button type="button" class="region-select">🇸🇬 Singapore</button>
+                    <button type="button" class="region-select">🇳🇱 Amsterdam</button>
+                    <button type="button" class="region-select">🇮🇳 Bangalore</button>
                 </div>
             </div>
 
-            <!-- OS Selection -->
             <div class="form-section">
                 <h2>Operating System</h2>
-                <div class="grid-container">
+                <div class="options-container">
                     <button type="button" class="os-select">Linux</button>
                     <button type="button" class="os-select">MacOS</button>
                 </div>
             </div>
 
-            <!-- Additional Storage -->
             <div class="form-section">
-                <label><input type="checkbox" id="storage-checkbox" onclick="toggleStorageOptions()"> Add additional storage</label>
-                <div class="grid-container hidden" id="additional-storage">
+                <label class="add-storage"><input type="checkbox" id="storage-checkbox" onclick="toggleStorageOptions()"> Add additional storage</label>
+                <div class="options-container hidden" id="additional-storage">
                     <button type="button" class="storage-option">256GB</button>
                     <button type="button" class="storage-option">512GB</button>
                 </div>
             </div>
 
-            <!-- Authentication -->
             <div class="form-section">
                 <h2>Authentication</h2>
-                <div class="grid-container">
+                <div class="options-container">
                     <button type="button" class="auth-option">SSH</button>
                     <button type="button" class="auth-option">Blank</button>
                 </div>
             </div>
 
-            <!-- Quantity -->
             <div class="form-section">
                 <h2>Quantity</h2>
                 <div class="quantity-selector">
@@ -61,45 +66,47 @@
                 </div>
             </div>
 
-            <!-- Host Name -->
             <div class="form-section">
                 <h2>Host Name</h2>
                 <input type="text" id="hostname" name="hostname" placeholder="Enter host name">
             </div>
 
-            <!-- Pricing Display -->
             <div class="form-section">
                 <h2>Pricing</h2>
                 <p id="price-display">$0.00</p>
             </div>
 
-            <button type="submit" class="submit-button">Submit</button>
+            <button type="submit" class="submit-button">Checkout</button>
         </form>
+        
     </div>
 
     <script>
+        document.getElementById('storage-checkbox').addEventListener('change', function() {
+        var storageSection = document.getElementById('additional-storage');
+        if (this.checked) {
+            storageSection.style.display = 'flex'; // Show the additional storage options
+        } else {
+            storageSection.style.display = 'none'; // Hide the additional storage options
+        }
+    });
+
         function toggleStorageOptions() {
-    var storageSection = document.getElementById('additional-storage');
-    var checkbox = document.getElementById('storage-checkbox');
-    storageSection.style.display = checkbox.checked ? 'block' : 'none';
-}
+            var storageSection = document.getElementById('additional-storage');
+            storageSection.style.display = document.getElementById('storage-checkbox').checked ? 'flex' : 'none';
+        }
 
-function changeQuantity(change) {
-    var quantityInput = document.getElementById('quantity');
-    var currentQuantity = parseInt(quantityInput.value);
-    currentQuantity += change;
-    if (currentQuantity < 1) currentQuantity = 1;
-    if (currentQuantity > 5) currentQuantity = 5;
-    quantityInput.value = currentQuantity;
-    updatePricing();
-}
+        function changeQuantity(change) {
+            var quantityInput = document.getElementById('quantity');
+            var currentQuantity = parseInt(quantityInput.value) + change;
+            quantityInput.value = Math.max(1, Math.min(5, currentQuantity));
+            updatePricing();
+        }
 
-function updatePricing() {
-    // Update pricing logic here based on selections
-    var priceDisplay = document.getElementById('price-display');
-    // Example price calculation
-    priceDisplay.innerText = '$' + (100 * parseInt(document.getElementById('quantity').value)).toFixed(2);
-}
-    </script> <!-- Ensure this path is correct -->
+        function updatePricing() {
+            var price = 100 * parseInt(document.getElementById('quantity').value);
+            document.getElementById('price-display').innerText = '$' + price.toFixed(2);
+        }
+    </script>
 </body>
 </html>
